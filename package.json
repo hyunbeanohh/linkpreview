@@ -1,0 +1,17 @@
+{
+  "name": "linkpreview",
+  "version": "1.0.0",
+  "description": "linkpreview",
+  "main": "linkpreview.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

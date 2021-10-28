@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- <script src ="./linkpreview.js"></script> -->
+    <title>test</title>
+</head>
+<body>
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 600px; margin: 0 auto;">
+        <h1 
+        style="display: block; font-size: 2rem; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;">
+        Link Preview Demo</h1>
+        <div class="content" style="display: flex; align-self: stretch; justify-content: center; flex-direction: column;">
+            <div class="form-container" style="display: flex; width: 100%;">
+                <form style="display: flex; width: 100%; margin-bottom: 20px;">
+                    <input type="url" name="url" required="required" placeholder="Url을 입력해주세요." class="urlInput"
+                    style="display: flex; flex: 1; margin-right:20px; height: 48px; box-shadow: none; border: 1px solid #e5e5e5; background-color: #ffffff;
+                    text-indent: 19px; padding:0px; position: relative; font-size: 16px;"
+                    >
+                    <button type="button" class = "submitBtn" onclick="load()"
+                    style="min-width: 0px; align-items: center; justify-content: center; width: auto; white-space: nowrap; font-size: 18px; font-stretch: normal; font-style: normal; cursor: pointer;
+                    border: 1px solid #e5e5e5; padding: 12px 20px;"
+                    >확인</button>
+                </form>
+            </div>
+            <div class="preview-container" style="text-align: center;">
+                <div class="loading-conatiner" style="display: none;">Processing...</div>
+                <span class="init-message" style="text-align: center;">Url을 입력하고 미리보기 정보를 확인하세요.</span>
+
+                <div class="preview-data" style="display: none;">
+                    <div class="img-container" style="text-align: center;">
+                        <img class="img"/>
+                    </div>
+    
+                    <div class="text-container" style="display: flex; flex-direction: column; min-width: 0; padding:10px; background-color: #f6f6f6; text-align: left;">
+                        <span class="domain" style="text-transform: uppercase;"></span>
+                        <span class="header" style="font-weight:600px; font-size: 18px;"></span>
+                        <span class="description" style="white-space:nowrap; text-overflow: ellipsis; min-width: 0; overflow: hidden;"></span>
+                    </div>
+                </div>
+                <span class="error-msg" style="color: red;"></span>
+            </div>
+        </div>
+    </div>
+    <div class="test"></div>
+</body>
+<script>
+
+    var x = new XMLHttpRequest();
+    x.open("POST","https://www.naver.com/",true);
+    x.setRequestHeader("Access-Control-Allow-Origin", "*");
+    x.setRequestHeader("Access-Control-Allow-Credentials", "true");
+    x.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    x.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    x.send();
+
+    function load(){
+        if(x.readyState == "4"){
+            console.log('complted load');
+
+            var el = document.createElement("yoso");
+            el.innerHTML = x.responseText;
+
+            for(var i = 0 ; i<el.querySelectorAll("title").length; i++){
+                console.log(el.querySelectorAll("title")[i].innerText + "<br>");
+            }
+            clearInterval(timer);
+        }else{
+            console.log("loading...");
+        }
+    }
+    var timer = setInterval(load,1000);
+</script>
+</html>
